@@ -31,9 +31,13 @@ app.post('/', (req, res)=>{
   }
   async function addUser(){
     try {
-      await sql.connect(config);
-      const result = await sql.query(`INSERT INTO Athlete ( Name, Age, Email ) VALUES( ${name}, ${email}, ${age} )`);//I'm aware of the bad practice here. Vulnerability to injection attach. This is designed for a local server and db not exposed to the public for injection attack.Practicing JS w/ sql
-      console.log(result)
+      let pool = await sql.connect(config);
+      let request = await pool.request()
+      request.input('name', sql.VarChar, name)
+      request.input('email', sql.VarChar, email)
+      request.input('age', sql.Int, age)
+      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email, AthleteId) VALUES (@name, @age, @email, 1)`);//I'm aware of the bad practice here. Vulnerability to injection attach. This is designed for a local server and db not exposed to the public for injection attack.Practicing JS w/ sql
+      return result
     } catch(err) {
       console.log(`there was a problem and nothing works ${err}`)
     }
