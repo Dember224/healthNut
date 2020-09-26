@@ -36,7 +36,7 @@ app.post('/', (req, res)=>{
       request.input('name', sql.VarChar, name)
       request.input('email', sql.VarChar, email)
       request.input('age', sql.Int, age)
-      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email, AthleteId) VALUES (@name, @age, @email, 1)`);//I'm aware of the bad practice here. Vulnerability to injection attach. This is designed for a local server and db not exposed to the public for injection attack.Practicing JS w/ sql
+      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email, AthleteId) VALUES (@name, @age, @email, 1)`);
       return result
     } catch(err) {
       console.log(`there was a problem and nothing works ${err}`)
