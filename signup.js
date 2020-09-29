@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser')
 const sql = require('mssql')
+const session = require('express-session')
 
 
 app.get('/', (req, res)=>{
@@ -14,6 +15,8 @@ app.get('/', (req, res)=>{
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(bodyParser.json());
+
+app.use(session({secret:'doodle monkey'}));
 
 app.post('/', (req, res)=>{
 
@@ -36,7 +39,7 @@ app.post('/', (req, res)=>{
       request.input('name', sql.VarChar, name)
       request.input('email', sql.VarChar, email)
       request.input('age', sql.Int, age)
-      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email, AthleteId) VALUES (@name, @age, @email, 1)`);
+      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email) VALUES (@name, @age, @email)`);
       return result
     } catch(err) {
       console.log(`there was a problem and nothing works ${err}`)
@@ -49,6 +52,10 @@ app.post('/', (req, res)=>{
   console.log(name);
   console.log(email);
   console.log(age)
+
+  
+  res.write(`<h1>Way to go taking the fitness initiative ${name}! </h1>`)
+  res.end()
 })
 
 app.listen(port, ()=>{
