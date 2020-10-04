@@ -4,6 +4,8 @@ const port = 3000;
 const bodyParser = require('body-parser')
 const sql = require('mssql')
 const session = require('express-session')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 
 app.get('/', (req, res)=>{
@@ -23,6 +25,7 @@ app.post('/', (req, res)=>{
   const name = req.body.name;
   const age = req.body.age;
   const email = req.body.email;
+  const password = req.body.password;
 
   const config = {
     user:'DESKTOP-8ED8NL1/Antoine',
@@ -39,8 +42,13 @@ app.post('/', (req, res)=>{
       request.input('name', sql.VarChar, name)
       request.input('email', sql.VarChar, email)
       request.input('age', sql.Int, age)
-      const result = await request.query(`INSERT INTO Athlete (Name, Age, Email) VALUES (@name, @age, @email)`);
-      return result
+
+      await bcrypt.hash(password, saltRounds, function(error, hash){
+        request.input('password', sql.VarChar, hash)
+        request.query(`INSERT INTO Athlete (Name, Age, Email, Password) VALUES (@name, @age, @email, @password)`);
+      });
+
+
     } catch(err) {
       console.log(`there was a problem and nothing works ${err}`)
     }
@@ -51,11 +59,16 @@ app.post('/', (req, res)=>{
 
   console.log(name);
   console.log(email);
-  console.log(age)
+  console.log(age);
 
-  
-  res.write(`<h1>Way to go taking the fitness initiative ${name}! </h1>`)
+
+
+  res.write(`<h1>Way to go taking that fitness initiative ${name}! </h1>`)
   res.end()
+})
+
+app.get('/home', (req, res) =>{
+  res.sendFile('C:/Users/Antoine/healthNut/views/home.html')
 })
 
 app.listen(port, ()=>{
