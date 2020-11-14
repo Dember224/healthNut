@@ -6,9 +6,9 @@ const sql = require('mssql')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const signinForm = require('C:/Users/Antoine/healthNut/router/signin.js')
 
-
-app.get('/', (req, res)=>{
+const signupForm = app.get('/', (req, res)=>{
   res.sendFile('C:/Users/Antoine/healthNut/views/signup.html')
 });
 
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(session({secret:'doodle monkey'}));
 
-app.post('/', (req, res)=>{
+const postSignup = app.post('/', (req, res)=>{
 
   const name = req.body.name;
   const age = req.body.age;
@@ -55,7 +55,6 @@ app.post('/', (req, res)=>{
   }
   addUser();
 
-  res.sendFile('C:/Users/Antoine/healthNut/views/home.html')
 
   console.log(name);
   console.log(email);
@@ -71,6 +70,13 @@ app.get('/home', (req, res) =>{
   res.sendFile('C:/Users/Antoine/healthNut/views/home.html')
 })
 
+app.get('/signin',signinForm);
+
 app.listen(port, ()=>{
   console.log(`Connection successful.`)
 })
+
+module.exports = {
+  signupForm,
+  postSignup
+}
