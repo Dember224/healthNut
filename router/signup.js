@@ -6,7 +6,7 @@ const sql = require('mssql')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
-const signinForm = require('C:/Users/Antoine/healthNut/router/signin.js')
+
 
 const signupForm = app.get('/', (req, res)=>{
   res.sendFile('C:/Users/Antoine/healthNut/views/signup.html')
@@ -70,7 +70,6 @@ app.get('/home', (req, res) =>{
   res.sendFile('C:/Users/Antoine/healthNut/views/home.html')
 })
 
-app.get('/signin',signinForm);
 
 app.listen(port, ()=>{
   console.log(`Connection successful.`)
