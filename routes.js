@@ -5,6 +5,10 @@ const session = require('express-session');
 const signup = require('C:/Users/Antoine/healthNut/router/signup.js');
 const signin = require('C:/Users/Antoine/healthNut/router/signin.js');
 
+let sesh;
+
+app.use(session({secret: 'doodle monkey'}));
+
 app.use('/signup', signup.signupForm);
 
 app.use('/', signup.postSignup);

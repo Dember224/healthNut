@@ -42,6 +42,7 @@ const signin = app.post('/signin', (req, res)=>{
             res.sendFile('C:/Users/Antoine/healthNut/views/home.html');
           } else {
             console.log('This is some bullshit. Use the right password.');
+            res.SendFile('C:/Users/Antoine/healthNut/views/signin.html');
           }
       })
 
