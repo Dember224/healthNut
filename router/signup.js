@@ -23,7 +23,7 @@ app.use(session({secret:'doodle monkey'}));
 const postSignup = app.post('/', (req, res)=>{
 
   const name = req.body.name;
-  const age = req.body.age;
+  const dob = req.body.dob;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -41,11 +41,11 @@ const postSignup = app.post('/', (req, res)=>{
       let request = await pool.request()
       request.input('name', sql.VarChar, name)
       request.input('email', sql.VarChar, email)
-      request.input('age', sql.Int, age)
+      request.input('dob', sql.DateTime, dob)
 
       await bcrypt.hash(password, saltRounds, function(error, hash){
         request.input('password', sql.VarChar, hash)
-        request.query(`INSERT INTO Athlete (Name, Age, Email, Password) VALUES (@name, @age, @email, @password)`);
+        request.query(`INSERT INTO Athlete (Name, Dob, Email, Password) VALUES (@name, @dob, @email, @password)`);
       });
 
 
@@ -58,7 +58,7 @@ const postSignup = app.post('/', (req, res)=>{
 
   console.log(name);
   console.log(email);
-  console.log(age);
+  console.log(dob);
 
 
 
