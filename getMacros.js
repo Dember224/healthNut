@@ -27,7 +27,11 @@ function getMacros(age, sex, height_feet,height_inches, weight, activity, goal){
     }
   }, function(error,response, body){
     if (error) return error;
-      return console.log(body);
+      const $ = cheerio.load(body);
+      const protein = $('input[name=proteinrange]').attr('value');
+      const carbs = $('input[name=carbsrange]').attr('value');
+      const fat =$('input[name=fatrange]').attr('value');
+      return console.log([protein,carbs,fat]);
   })
 };
 
