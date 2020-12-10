@@ -28,12 +28,12 @@ function getMacros(age, sex, height_feet,height_inches, weight, activity, goal){
   }, function(error,response, body){
     if (error) return error;
       const $ = cheerio.load(body);
-      const protein = $('input[name=proteinrange]').attr('value');
-      const carbs = $('input[name=carbsrange]').attr('value');
-      const fat =$('input[name=fatrange]').attr('value');
+      const protein = parseFloat($('input[name=proteinrange]').attr('value'));
+      const carbs = parseFloat($('input[name=carbsrange]').attr('value'));
+      const fat = parseFloat($('input[name=fatrange]').attr('value'));
       return console.log([protein,carbs,fat]);
   })
 };
 
-console.log(getMacros(30,'m',5,10,190,1.2,'l1'));
+getMacros(30,'m',5,10,190,1.2,'l1');
 // cmop=0&cformula=m&cfatpct=20&printit=0&x=66&y=30
