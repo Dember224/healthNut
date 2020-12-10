@@ -18,9 +18,7 @@ app.use(bodyParser.json());
 app.use(session({secret:'doodle monkey'}));
 
 const signin = app.post('/signin', (req, res)=>{
-  const config = dbConfig.config
-
-  };
+  const config = dbConfig.config;
 
   const email = req.body.email;
   const password = req.body.password;
