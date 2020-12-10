@@ -6,6 +6,7 @@ const sql = require('mssql')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const dbConfig = require('C:/Users/Antoine/healthNut/DBConfig.js');
 
 
 const signupForm = app.get('/', (req, res)=>{
@@ -27,14 +28,8 @@ const postSignup = app.post('/', (req, res)=>{
   const email = req.body.email;
   const password = req.body.password;
 
-  const config = {
-    user:'DESKTOP-8ED8NL1/Antoine',
-    server:'DESKTOP-8ED8NL1',
-    database: 'master',
-    password:'u$agold800',
-    options:{enableArithAbort: true}
+  const config = dbConfig.config
 
-  }
   async function addUser(){
     try {
       let pool = await sql.connect(config);

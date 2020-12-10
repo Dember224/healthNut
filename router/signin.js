@@ -5,6 +5,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const bodyParser = require('body-parser');
+const dbConfig = require('C:/Users/Antoine/healthNut/DBConfig.js');
 
 const signinForm = app.get('/signin', (req, res)=>{
   res.sendFile('C:/Users/Antoine/healthNut/views/signin.html');
@@ -17,12 +18,7 @@ app.use(bodyParser.json());
 app.use(session({secret:'doodle monkey'}));
 
 const signin = app.post('/signin', (req, res)=>{
-  const config = {
-    user:'DESKTOP-8ED8NL1/Antoine',
-    server:'DESKTOP-8ED8NL1',
-    database: 'master',
-    password:'u$agold800',
-    options:{enableArithAbort: true}
+  const config = dbConfig.config
 
   };
 
