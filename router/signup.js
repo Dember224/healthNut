@@ -27,6 +27,7 @@ const postSignup = app.post('/', (req, res)=>{
   const dob = req.body.dob;
   const email = req.body.email;
   const password = req.body.password;
+  req.session.email = email;
 
   const config = dbConfig.config
 

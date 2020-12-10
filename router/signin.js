@@ -22,6 +22,7 @@ const signin = app.post('/signin', (req, res)=>{
 
   const email = req.body.email;
   const password = req.body.password;
+  req.session.email = email;
   async function userLogin() {
     try{
       let pool = await sql.connect(config);
