@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 const bodyParser = require('body-parser')
 const sql = require('mssql')
 const session = require('express-session')
@@ -67,9 +66,6 @@ app.get('/home', (req, res) =>{
 })
 
 
-app.listen(port, ()=>{
-  console.log(`Connection successful.`)
-})
 
 module.exports = {
   signupForm,

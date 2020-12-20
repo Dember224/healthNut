@@ -48,6 +48,7 @@ const signin = app.post('/signin', (req, res)=>{
 
   }
   userLogin();
+  res.end()
 })
 
 const home = app.get('/home', (req, res)=>{
