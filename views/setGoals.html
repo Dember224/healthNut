@@ -5,13 +5,46 @@
     <title></title>
   </head>
   <body>
-    <form class="" method="post" action="/setGoals">
-      <input type="text" name="sex">m/f</input>
-      <input type="number" name="height_feet">feet</input>
-      <input type="number" name="height_inches">inches</input>
-      <input type="number" name="weight">lbs</input>
-      <input type="number" name="activity" step=".1">activity</input>
-      <input type="text" name="goal" >goal</input>
+    <form class="" method="post" action="/setGoals" id="bodyStats">
+      <p>
+        <label for="name">Sex</label>
+        <select name="sex" form="bodyStats">
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </p>
+      <p>
+        <label for="height_feet">Height</label>
+        <input type="number" name="height_feet">feet</input>
+        <input type="number" name="height_inches">inches</input>
+      </p>
+      <p>
+        <label for="weight">Weight</label>
+        <input type="number" name="weight">lbs</input>
+      </p>
+      <p>
+        <label for="activity">Activity Level</label>
+        <select name="activity" form="bodyStats">
+          <option value="1.2">I don't even lift</option>
+          <option value="1.375">Bullshit workouts 2-3 times weekly</option>
+          <option value="1.465">High School athlete level active</option>
+          <option value="1.55">Training to avenge your clan</option>
+          <option value="1.725">UFC Fighter</option>
+          <option value="1.9">Amish Farmer</option>
+        </select>
+      </p>
+      <p>
+        <label for="goal">Fitness Goal</label>
+        <select name="goal" form="bodyStats">
+          <option value="1">Maintin weight</option>
+          <option value="l">Mild weightloss</option>
+          <option value="l1">Weighthloss</option>
+          <option value="l2">Extreme weightloss</option>
+          <option value="g">Mild weightgain</option>
+          <option value="g1">Weightgain</option>
+          <option value="g2">Extreme weightgain</option>
+        </select>
+      </p>
       <input type="submit" value="submit"></input>
 
     </form>
