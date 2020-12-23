@@ -87,20 +87,20 @@ const setGoals = app.post('/setGoals', (req, res)=>{
       try{
         await getAge();
 
-      function getMacros (age,sex,height_feet,height_inches,weight,activity,goal){
+      function getMacros (){ //need to edit this to insert correct params
           request({
             uri:'https://www.calculator.net/macro-calculator.html',
             qs:{
               ctype:'standard',
-              cage:age,
-              csex:sex,
-              cheightfeet:height_feet,
-              cheightinch:height_inches,
-              cpound:weight,
+              cage:bodyData.age,
+              csex:MacroObject.sex,
+              cheightfeet:MacroObject.height_feet,
+              cheightinch:MacroObject.height_inches,
+              cpound:MacroObject.weight,
               cheightmeter:'180',
               ckg:'65',
-              cactivity:activity,
-              cgoal:goal,
+              cactivity:MacroObject.activity,
+              cgoal:MacroObject.goal,
               cmop:0,
               cformula:'m',
               cfatpct:20,
@@ -128,6 +128,12 @@ const setGoals = app.post('/setGoals', (req, res)=>{
               request.input('Athlete_ID', sql.Int,athleteId);
               await request.query('INSERT INTO MacroGoals (protein, carbs, fat, calories, DayOfGoal,Athlete_ID) VALUES (@protein, @carbs, @fat, @calories,GETDATE(), @Athlete_ID)');
               const macros =  {protein,carbs,fat, athleteId, age: MacroObject.age};
+              await res.write(`
+                <h1>Based on your current data and goals we recommend the following Macronutrient targets:</h1>
+                <h2>Carbohydrates: ${carbs} grams</h2>
+                <h2>Protein: ${protein} grams</h2>
+                <h2>Fat: ${fat} grams</h2>
+                <h2>This should be approximately ${calories} calories.</h2>`)
           })
         };
 
@@ -164,7 +170,7 @@ const setGoals = app.post('/setGoals', (req, res)=>{
 
   postStats();
 
-  res.end()
+  
 })
 
 
