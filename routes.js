@@ -4,7 +4,8 @@ const port = 3001;
 const session = require('express-session');
 const signup = require('C:/Users/Antoine/healthNut/router/signup.js');
 const signin = require('C:/Users/Antoine/healthNut/router/signin.js');
-const setGoals = require('C:/Users/Antoine/healthNut/router/setGoals.js')
+const setGoals = require('C:/Users/Antoine/healthNut/router/setGoals.js');
+const findFood = require('C:/Users/Antoine/healthNut/router/getNutritionData.js')
 
 let sesh;
 
@@ -23,6 +24,13 @@ app.use('/home', signin.home);
 app.get('/setGoals', setGoals.setGoals);
 
 app.post('/setGoals', setGoals.setGoalsForm);
+
+app.get('/mealPrep', findFood.enterFood);
+
+app.post('/mealPrep', findFood.searchFood);
+
+
+
 
 app.listen(port, ()=>{
   console.log(`Connection successful.`)
