@@ -1,7 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from 'react'
+import axios from 'axios';
 
 function App() {
+
+  callAPI(){
+      const thisIsBS = axios.get('http://localhost:9000/mealPrep')
+      console.log(thisIsBS);
+      return thisIsBS
+    }
+
+  useEffect(()=>{
+    callAPI();
+  });
+
   return (
     <div className="App">
       <header className="App-header">
